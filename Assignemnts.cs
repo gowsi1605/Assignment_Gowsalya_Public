@@ -13,15 +13,31 @@ namespace Gowsalya_Assignment.Assignment
             // Case-insensitive, ignores whitespace (modify if you want strict behavior).
             public static bool IsAnagram(string a, string b)
             {
+
                 if (a == null || b == null) return false;
-                a = new string(a.ToLower().Where(c => !char.IsWhiteSpace(c)).ToArray());
-                b = new string(b.ToLower().Where(c => !char.IsWhiteSpace(c)).ToArray());
+
+                a = a.ToLower().Replace(" ", "");
+                b = b.ToLower().Replace(" ", "");
+
                 if (a.Length != b.Length) return false;
 
-                var counts = new int[256];
-                foreach (char c in a) counts[c]++;
-                foreach (char c in b) counts[c]--;
-                return counts.All(x => x == 0);
+                char[] aChars = a.ToArray();
+                char[] bChars = b.ToArray();
+
+                Array.Sort(aChars);
+                Array.Sort(bChars);
+
+                return new string(aChars) == new string(bChars);
+                //if (a == null || b == null) return false;
+                //a = new string(a.ToLower().Where(c => !char.IsWhiteSpace(c)).ToArray());
+                //b = new string(b.ToLower().Where(c => !char.IsWhiteSpace(c)).ToArray());
+                //if (a.Length != b.Length) return false;
+
+                //var counts = new int[256];
+                //foreach (char c in a) counts[c]++;
+                //foreach (char c in b) counts[c]--;
+                //return counts.All(x => x == 0);
+
             }
 
             // 2. Given s1 and s2, return true if s2 == rotate(s1, n) (rotate to the right by n places).
@@ -112,41 +128,83 @@ namespace Gowsalya_Assignment.Assignment
             // 8. Check palindrome phrase (ignore non-alphanumeric, case-insensitive)
             public static bool IsPalindromePhrase(string s)
             {
+
                 if (s == null) return true;
+
                 int i = 0, j = s.Length - 1;
+
                 while (i < j)
                 {
-                    while (i < j && !char.IsLetterOrDigit(s[i])) i++;
-                    while (i < j && !char.IsLetterOrDigit(s[j])) j--;
-                    if (i < j)
-                    {
-                        if (char.ToLower(s[i]) != char.ToLower(s[j])) return false;
-                        i++; j--;
-                    }
+                    // Skip non-alphanumeric characters manually
+                    while (i < j && !((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9'))) i++;
+                    while (i < j && !((s[j] >= 'a' && s[j] <= 'z') || (s[j] >= 'A' && s[j] <= 'Z') || (s[j] >= '0' && s[j] <= '9'))) j--;
+
+                    // Compare letters/digits, ignoring case
+                    char left = s[i];
+                    char right = s[j];
+
+                    if (left >= 'A' && left <= 'Z') left = (char)(left + 32);
+                    if (right >= 'A' && right <= 'Z') right = (char)(right + 32);
+
+                    if (left != right) return false;
+
+                    i++;
+                    j--;
                 }
+
                 return true;
+
+                //if (s == null) return true;
+                //int i = 0, j = s.Length - 1;
+                //while (i < j)
+                //{
+                //    while (i < j && !char.IsLetterOrDigit(s[i])) i++;
+                //    while (i < j && !char.IsLetterOrDigit(s[j])) j--;
+                //    if (i < j)
+                //    {
+                //        if (char.ToLower(s[i]) != char.ToLower(s[j])) return false;
+                //        i++; j--;
+                //    }
+                //}
+                //return true;
             }
 
             // 9. Fibonacci series upto nth term (0-based): returns list of first n terms (n >= 1 return at least first term)
             // We'll define: n = number of terms to return. Example n=5 -> [0,1,1,2,3]
-            public static List<long> FibonacciSeries(int n)
+
+            public static void FibonacciSeries(int n)
             {
-                var res = new List<long>();
-                if (n <= 0) return res;
-                res.Add(0);
-                if (n == 1) return res;
-                res.Add(1);
-                for (int i = 2; i < n; i++)
+                if (n <= 0) return;
+
+                long first = 0, second = 1;
+
+                for (int i = 0; i < n; i++)
                 {
-                    long next = res[i - 1] + res[i - 2];
-                    res.Add(next);
+                    Console.Write(first + " ");
+                    long next = first + second;
+                    first = second;
+                    second = next;
                 }
-                return res;
             }
 
-            // 10. Wildcard matching: pattern supports '?' (one char) and '*' (any sequence, incl empty)
-            // DP solution O(m*n)
-            public static bool IsWildcardMatch(string s, string p)
+            //public static List<long> FibonacciSeries(int n)
+            //{
+            //    var res = new List<long>();
+            //    if (n <= 0) return res;
+            //    res.Add(0);
+            //    if (n == 1) return res;
+            //    res.Add(1);
+            //    for (int i = 2; i < n; i++)
+            //    {
+            //        long next = res[i - 1] + res[i - 2];
+            //        res.Add(next);
+            //    }
+            //    return res;
+            //}
+
+        // 10. Wildcard matching: pattern supports '?' (one char) and '*' (any sequence, incl empty)
+        // DP solution O(m*n)
+        public static bool IsWildcardMatch(string s, string p)
             {
                 if (s == null || p == null) return false;
                 int n = s.Length, m = p.Length;
