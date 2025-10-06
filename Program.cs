@@ -7,9 +7,10 @@ namespace Gowsalya_Assignment
     {
         public static void Main(string[] args)
         {
-           
+
                 // 1
-                Console.WriteLine("1. Anagram: 'listen' vs 'silent' -> " + InterviewAssignments.IsAnagram("listen", "silent"));
+                Console.WriteLine("1. Anagram: 'The eyes' vs 'They see' -> " + InterviewAssignments.IsAnagram("The eyes", "They see"));
+                //Console.WriteLine("1. Anagram: 'listen' vs 'silent' -> " + InterviewAssignments.IsAnagram("listen", "silent"));
 
                 // 2
                 Console.WriteLine("2. Rotation by n: rotate 'abcdef' by 2 -> 'efabcd' ? " +
@@ -37,7 +38,10 @@ namespace Gowsalya_Assignment
                 Console.WriteLine("8. Palindrome phrase 'A man, a plan, a canal: Panama' -> " + InterviewAssignments.IsPalindromePhrase("A man, a plan, a canal: Panama"));
 
                 // 9
-                Console.WriteLine("9. Fibonacci upto 7 terms -> [" + string.Join(",", InterviewAssignments.FibonacciSeries(7)) + "]");
+                Console.Write("9. Fibonacci upto 7 terms -> [");
+                InterviewAssignments.FibonacciSeries(7);   // This prints numbers directly
+                Console.WriteLine("]");
+                //Console.WriteLine("9. Fibonacci upto 7 terms -> [" + string.Join(",", InterviewAssignments.FibonacciSeries(7)) + "]");
 
                 // 10
                 Console.WriteLine("10. Wildcard match 'he?lo' vs 'hello' -> " + InterviewAssignments.IsWildcardMatch("hello", "he?lo"));
