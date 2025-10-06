@@ -10,11 +10,10 @@ namespace Gowsalya_Assignment
 
                 // 1
                 Console.WriteLine("1. Anagram: 'The eyes' vs 'They see' -> " + InterviewAssignments.IsAnagram("The eyes", "They see"));
-                //Console.WriteLine("1. Anagram: 'listen' vs 'silent' -> " + InterviewAssignments.IsAnagram("listen", "silent"));
 
                 // 2
-                Console.WriteLine("2. Rotation by n: rotate 'abcdef' by 2 -> 'efabcd' ? " +
-                InterviewAssignments.IsRotationByN("abcdef", "efabcd", 2));
+                Console.WriteLine("2. Rotation by n: rotate 'rotation' by 2 -> 'onrotati' ? " +
+                InterviewAssignments.IsRotationByN("rotation", "onrotati", 2));
 
                 // 3
                 Console.WriteLine("3. Remove adjacent duplicates: 'abbaca' -> " + InterviewAssignments.RemoveAdjacentDuplicates("abbaca"));
@@ -39,9 +38,8 @@ namespace Gowsalya_Assignment
 
                 // 9
                 Console.Write("9. Fibonacci upto 7 terms -> [");
-                InterviewAssignments.FibonacciSeries(7);   // This prints numbers directly
+                InterviewAssignments.FibonacciSeries(7);  
                 Console.WriteLine("]");
-                //Console.WriteLine("9. Fibonacci upto 7 terms -> [" + string.Join(",", InterviewAssignments.FibonacciSeries(7)) + "]");
 
                 // 10
                 Console.WriteLine("10. Wildcard match 'he?lo' vs 'hello' -> " + InterviewAssignments.IsWildcardMatch("hello", "he?lo"));
