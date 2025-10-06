@@ -27,16 +27,7 @@ namespace Gowsalya_Assignment.Assignment
                 Array.Sort(aChars);
                 Array.Sort(bChars);
 
-                return new string(aChars) == new string(bChars);
-                //if (a == null || b == null) return false;
-                //a = new string(a.ToLower().Where(c => !char.IsWhiteSpace(c)).ToArray());
-                //b = new string(b.ToLower().Where(c => !char.IsWhiteSpace(c)).ToArray());
-                //if (a.Length != b.Length) return false;
-
-                //var counts = new int[256];
-                //foreach (char c in a) counts[c]++;
-                //foreach (char c in b) counts[c]--;
-                //return counts.All(x => x == 0);
+                return new string(aChars) == new string(bChars);                
 
             }
 
@@ -44,14 +35,22 @@ namespace Gowsalya_Assignment.Assignment
             // If you want left rotation, call with negative n or adjust accordingly.
             public static bool IsRotationByN(string s1, string s2, int n)
             {
+
                 if (s1 == null || s2 == null) return false;
                 if (s1.Length != s2.Length) return false;
+                if (s1.Length == 0) return true;
+
                 int len = s1.Length;
-                if (len == 0) return true; // both empty
-                n = ((n % len) + len) % len; // normalize
-                                             // rotate right by n -> last n characters move to front
-                string rotated = s1.Substring(len - n) + s1.Substring(0, len - n);
-                return rotated == s2;
+                n = n % len; // handle rotations larger than length
+                if (n < 0) n += len; // handle negative rotations (left rotation)
+
+                for (int i = 0; i < len; i++)
+                {
+                    int rotatedIndex = (i + n) % len; // index in s1 after rotation
+                    if (s1[i] != s2[(i + n) % len])
+                        return false;
+                }
+                return true;               
             }
 
             // 3. Remove adjacent duplicate characters repeatedly until none left
@@ -153,20 +152,7 @@ namespace Gowsalya_Assignment.Assignment
                 }
 
                 return true;
-
-                //if (s == null) return true;
-                //int i = 0, j = s.Length - 1;
-                //while (i < j)
-                //{
-                //    while (i < j && !char.IsLetterOrDigit(s[i])) i++;
-                //    while (i < j && !char.IsLetterOrDigit(s[j])) j--;
-                //    if (i < j)
-                //    {
-                //        if (char.ToLower(s[i]) != char.ToLower(s[j])) return false;
-                //        i++; j--;
-                //    }
-                //}
-                //return true;
+              
             }
 
             // 9. Fibonacci series upto nth term (0-based): returns list of first n terms (n >= 1 return at least first term)
@@ -185,26 +171,11 @@ namespace Gowsalya_Assignment.Assignment
                     first = second;
                     second = next;
                 }
-            }
+            }            
 
-            //public static List<long> FibonacciSeries(int n)
-            //{
-            //    var res = new List<long>();
-            //    if (n <= 0) return res;
-            //    res.Add(0);
-            //    if (n == 1) return res;
-            //    res.Add(1);
-            //    for (int i = 2; i < n; i++)
-            //    {
-            //        long next = res[i - 1] + res[i - 2];
-            //        res.Add(next);
-            //    }
-            //    return res;
-            //}
-
-        // 10. Wildcard matching: pattern supports '?' (one char) and '*' (any sequence, incl empty)
-        // DP solution O(m*n)
-        public static bool IsWildcardMatch(string s, string p)
+            // 10. Wildcard matching: pattern supports '?' (one char) and '*' (any sequence, incl empty)
+            // DP solution O(m*n)
+            public static bool IsWildcardMatch(string s, string p)
             {
                 if (s == null || p == null) return false;
                 int n = s.Length, m = p.Length;
