@@ -94,35 +94,26 @@ namespace Gowsalya_Assignment.Assignment
             }
 
             // 6. Intersection of two arrays (unique elements). Result order unspecified; we'll return in insertion order from nums1.
-            public static int[] Intersection(int[] nums1, int[] nums2)
-            {
-                if (nums1 == null || nums2 == null) return Array.Empty<int>();
-                var set2 = new HashSet<int>(nums2);
-                var resSet = new HashSet<int>();
-                var res = new List<int>();
-                foreach (var x in nums1)
-                {
-                    if (set2.Contains(x) && resSet.Add(x))
-                        res.Add(x);
-                }
-                return res.ToArray();
-            }
+
+             public static int[] Intersection(int[] nums1, int[] nums2)
+             {
+                 if (nums1 == null || nums2 == null) return new int[0];
+                 return nums1.Distinct().Where(x => nums2.Contains(x)).ToArray();
+             }
+
 
             // 7. Reverse signed 32-bit integer. Return 0 on overflow.
             public static int ReverseInt(int x)
             {
-                long result = 0; // use long to detect overflow
-                int sign = x < 0 ? -1 : 1;
-                long abs = Math.Abs((long)x);
-                while (abs > 0)
-                {
-                    int digit = (int)(abs % 10);
-                    result = result * 10 + digit;
-                    if (result > int.MaxValue) return 0;
-                    abs /= 10;
-                }
-                return (int)(result * sign);
+                string s = Math.Abs(x).ToString();           
+                char[] arr = s.ToCharArray();                
+                Array.Reverse(arr);                          
+                string rev = new string(arr);                
+                if (int.TryParse(rev, out int num))          
+                    return x < 0 ? -num : num;               
+                return 0;                                    
             }
+       
 
             // 8. Check palindrome phrase (ignore non-alphanumeric, case-insensitive)
             public static bool IsPalindromePhrase(string s)
