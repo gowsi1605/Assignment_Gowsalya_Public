@@ -27,11 +27,11 @@ namespace Gowsalya_Assignment
                 Console.WriteLine("5. Remove duplicates from array [1,2,2,3,1] -> [" + string.Join(",", InterviewAssignments.RemoveDuplicatesPreserveOrder(arr)) + "]");
 
                 // 6
-                var inter = InterviewAssignments.Intersection(new int[] { 4, 9, 5 }, new int[] { 9, 4, 9, 8, 4 });
+                var inter = InterviewAssignments.Intersection(new int[] { 1, 2, 3, 4 }, new int[] { 3, 4, 5, 6 });
                 Console.WriteLine("6. Intersection -> [" + string.Join(",", inter) + "]");
 
                 // 7
-                Console.WriteLine("7. Reverse int 123 -> " + InterviewAssignments.ReverseInt(123) + " ; -123 -> " + InterviewAssignments.ReverseInt(-123) + " ; overflow test 1534236469 -> " + InterviewAssignments.ReverseInt(1534236469));
+                Console.WriteLine("7. ReverseInt of 123 -> " + InterviewAssignments.ReverseInt(123));
 
                 // 8
                 Console.WriteLine("8. Palindrome phrase 'A man, a plan, a canal: Panama' -> " + InterviewAssignments.IsPalindromePhrase("A man, a plan, a canal: Panama"));
